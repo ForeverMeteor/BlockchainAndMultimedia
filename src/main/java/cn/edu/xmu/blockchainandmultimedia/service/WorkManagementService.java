@@ -1,8 +1,8 @@
 package cn.edu.xmu.blockchainandmultimedia.service;
 
 import cn.edu.xmu.blockchainandmultimedia.controller.vo.WorkDetailedModifyVo;
-import cn.edu.xmu.blockchainandmultimedia.controller.vo.WorkDetailedVo;
-import cn.edu.xmu.blockchainandmultimedia.dao.WorkManagementDao;
+import cn.edu.xmu.blockchainandmultimedia.dao.WorkDao;
+import cn.edu.xmu.blockchainandmultimedia.dao.bo.Work;
 import cn.edu.xmu.blockchainandmultimedia.service.dto.PageDto;
 import cn.edu.xmu.blockchainandmultimedia.service.dto.SimpleWorkDto;
 import cn.edu.xmu.blockchainandmultimedia.service.dto.WorkDetailedDto;
@@ -13,14 +13,17 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class WorkManagementService {
 
-    private WorkManagementDao workManagementDao;
+    private WorkDao workDao;
 
     @Autowired
-    public WorkManagementService(WorkManagementDao workManagementDao){
-        this.workManagementDao = workManagementDao;
+    public WorkManagementService(WorkDao workDao){
+        this.workDao = workDao;
     }
 
     /**
@@ -32,7 +35,20 @@ public class WorkManagementService {
     @Transactional
     public PageDto<SimpleWorkDto> retrieveWorkByUserId(Long id, Integer page, Integer pageSize){
         PageRequest pageRequest = PageRequest.of(page - 1, pageSize);
-        return workManagementDao.retrieveWorkByUserId(id, pageRequest);
+        List<Work> works= workDao.retrieveWorkByUserId(id, pageRequest);
+        List<SimpleWorkDto> simpleWorkDtos = new ArrayList<>();
+        for(int i=0; i<pageSize;i++){
+            Work work = works.get((page-1)*pageSize + i);
+
+            SimpleWorkDto simpleWorkDto = new SimpleWorkDto();
+            simpleWorkDto.setId(work.getId());
+            simpleWorkDto.setName(work.getWorkName());
+            simpleWorkDto.setUpdateTime(work.getUpdateTime());
+            simpleWorkDto.setStatus(work.getStatus());
+
+            simpleWorkDtos.add(simpleWorkDto);
+        }
+        return new PageDto<>(simpleWorkDtos, page, pageSize);
     }
 
     /**
@@ -43,7 +59,7 @@ public class WorkManagementService {
      */
     @Transactional
     public WorkDetailedDto retrieveWorkDetailedById(Long workId){
-        return workManagementDao.retrieveWorkDetailedById(workId);
+        return workDao.retrieveWorkDetailedById(workId);
     }
 
     /**
@@ -54,7 +70,7 @@ public class WorkManagementService {
      */
     public ReturnObject updateWorkDetailedById(Long workId, WorkDetailedModifyVo body){
         //TODO 复制为BO
-        return workManagementDao.saveWorkDetailedById(workId, BO);
+        return workDao.saveWorkDetailedById(workId, BO);
     }
 
     /**
@@ -64,7 +80,7 @@ public class WorkManagementService {
      * @return
      */
     public WorkStatusDto findCertificateStatus(Long workId){
-        return workManagementDao.findCertificateStatus(workId);
+        return workDao.findCertificateStatus(workId);
     }
 
     /**

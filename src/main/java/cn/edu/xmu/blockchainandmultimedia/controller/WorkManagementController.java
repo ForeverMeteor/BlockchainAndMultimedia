@@ -24,7 +24,7 @@ public class WorkManagementController {
      * @param
      * @return
      */
-    @GetMapping("/")
+    @GetMapping("/{id}")
     public ReturnObject retrieveWorkByUserId(@PathVariable Long id) {
         return new ReturnObject(workManagementService.retrieveWorkByUserId(id, 1, 10)); //id, page, pageSize
     }
@@ -35,7 +35,7 @@ public class WorkManagementController {
      * @param
      * @return
      */
-    @GetMapping("/detailed")
+    @GetMapping("/detailed/{workId}")
     public ReturnObject findWorkDetailedById(@PathVariable Long workId){
         return new ReturnObject(workManagementService.retrieveWorkDetailedById(workId)); //id, page, pageSize
     }
@@ -46,7 +46,7 @@ public class WorkManagementController {
      * @param
      * @return
      */
-    @PutMapping("/detailed")
+    @PutMapping("/detailed/{workId}")
     public ReturnObject updateWorkDetailedById(
             @PathVariable Long workId,
             @RequestBody WorkDetailedModifyVo body){
@@ -59,7 +59,7 @@ public class WorkManagementController {
      * @param
      * @return
      */
-    @GetMapping("/certificate/status")
+    @GetMapping("/certificate/status/{workId}")
     public ReturnObject findCertificateStatus(@PathVariable Long workId){
         return new ReturnObject(workManagementService.findCertificateStatus(workId));
     }
@@ -70,7 +70,7 @@ public class WorkManagementController {
      * @param
      * @return
      */
-    @PostMapping("/certificate")
+    @PostMapping("/certificate/{workId}")
     public ReturnObject generateCertificate(@PathVariable Long workId){
         return new ReturnObject(workManagementService.generateCertificate(workId));
     }

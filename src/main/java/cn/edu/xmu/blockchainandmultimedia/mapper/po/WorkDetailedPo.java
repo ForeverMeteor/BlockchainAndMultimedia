@@ -1,20 +1,24 @@
-package cn.edu.xmu.blockchainandmultimedia.service.dto;
+package cn.edu.xmu.blockchainandmultimedia.mapper.po;
 
 import cn.edu.xmu.blockchainandmultimedia.controller.vo.AuthorVo;
-import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
 
+@Entity
+@Table(name = "work")
 @Data
-@JsonInclude(JsonInclude.Include.NON_NULL)
+@AllArgsConstructor
 @NoArgsConstructor
-public class WorkDetailedDto {
+public class WorkDetailedPo {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String workName;
     private String workDescription;
-    private List<AuthorVo> authors;
     private Byte workCategory;
     private String finishTime;
     private String finishPlace;
@@ -23,4 +27,6 @@ public class WorkDetailedDto {
     private Byte workNature;
     private Byte publicNotice;
     private Byte rightBelonging;
+    private String updateTime;
+    private Byte status;
 }

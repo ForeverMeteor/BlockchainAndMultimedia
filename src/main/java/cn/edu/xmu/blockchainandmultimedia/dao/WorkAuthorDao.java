@@ -5,5 +5,5 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 @RefreshScope
-public class WorkManagementDao {
+public class WorkAuthorDao {
 }
