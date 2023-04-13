@@ -10,4 +10,6 @@ import java.util.List;
 public interface WorkAuthorMapper extends JpaRepository<WorkAuthorPo, Long> {
     List<WorkAuthorPo> findByAuthorId(Long authorId);
 
+    List<WorkAuthorPo> findByWorkId(Long workId);
+
 }

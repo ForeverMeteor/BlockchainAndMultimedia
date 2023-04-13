@@ -29,4 +29,5 @@ public class WorkDetailedPo {
     private Byte rightBelonging;
     private String updateTime;
     private Byte status;
+    private Long mainAuthorId;
 }

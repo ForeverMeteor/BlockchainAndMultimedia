@@ -18,4 +18,5 @@ public class WorkPo {
     private String workName;
     private String updateTime;
     private Byte status;
+    private Long mainAuthorId;
 }

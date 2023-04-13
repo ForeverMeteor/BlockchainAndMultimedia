@@ -5,7 +5,6 @@ import cn.edu.xmu.blockchainandmultimedia.dao.bo.WorkDetailed;
 import cn.edu.xmu.blockchainandmultimedia.mapper.WorkAuthorMapper;
 import cn.edu.xmu.blockchainandmultimedia.mapper.WorkDetailedMapper;
 import cn.edu.xmu.blockchainandmultimedia.mapper.WorkMapper;
-import cn.edu.xmu.blockchainandmultimedia.mapper.po.WorkAuthorPo;
 import cn.edu.xmu.blockchainandmultimedia.mapper.po.WorkDetailedPo;
 import cn.edu.xmu.blockchainandmultimedia.mapper.po.WorkPo;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,20 +44,14 @@ public class WorkDao {
         return bo;
     }
 
-    public WorkDetailed getWorkDetailedBo(WorkDetailedPo po){
-        WorkDetailed bo = WorkDetailed.builder()
-
-                .build();
-        bo.s
-    }
-
-    public List<Work> retrieveWorkByUserId(Long authorId, PageRequest pageRequest){
+    public List<Work> retrieveWorkByAuthorId(Long authorId, PageRequest pageRequest){
         if (authorId == null)
             return null;
-        List<WorkAuthorPo> workAuthorPos =  workAuthorMapper.findByAuthorId(authorId);
+
+        List<WorkPo> workPos = workMapper.findSimpleWorkByMainAuthorId(authorId);
+
         List<Work> works = new ArrayList<>();
-        for(WorkAuthorPo workAuthorPo : workAuthorPos){
-            WorkPo workPo = workMapper.findById(workAuthorPo.getWorkId()).get();
+        for(WorkPo workPo : workPos){
             Work work = getWorkBo(workPo);
             works.add(work);
         }
@@ -66,7 +59,8 @@ public class WorkDao {
     }
 
     public WorkDetailed retrieveWorkDetailedById(Long workId){
-        return workDetailedMapper.findById(workId);
+        WorkDetailedPo workDetailedPo =  workDetailedMapper.findById(workId).get();
+        return getWorkDetailedBo(workDetailedPo);
     }
 }
 

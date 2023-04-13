@@ -24,15 +24,14 @@ public class WorkDetailed {
     private AuthorDao authorDao;
 
     @Setter
-    private List<AuthorVo> authors;
+    private List<Author> authors;
 
-    public List<AuthorVo> getAuthors(){
+    public List<Author> getAuthors(){
         if(null == this.authors && null != authorDao){
             this.authors = this.authorDao.findByWorkId();
         }
         return this.authors;
     }
-
 
     private Byte workCategory;
     private String finishTime;
