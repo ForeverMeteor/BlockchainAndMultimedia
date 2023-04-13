@@ -8,8 +8,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class AuthorVo {
-    private int authorCategory;
+    private Byte authorCategory;
     private String authorName;
-    private int signature;
-    private int authorRights;
+    private Byte signature;
+    private Byte authorRights;
 }

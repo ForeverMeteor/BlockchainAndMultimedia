@@ -14,12 +14,12 @@ public class WorkDetailedModifyVo {
     private String workName;
     private String workDescription;
     private List<AuthorVo> authors;
-    private int workCategory;
+    private Byte workCategory;
     private String finishTime;
     private String finishPlace;
-    private int publishStatus;
-    private int rightsObtain;
-    private int workNature;
-    private int publicNotice;
-    private int rightBelonging;
+    private Byte publishStatus;
+    private Byte rightsObtain;
+    private Byte workNature;
+    private Byte publicNotice;
+    private Byte rightBelonging;
 }

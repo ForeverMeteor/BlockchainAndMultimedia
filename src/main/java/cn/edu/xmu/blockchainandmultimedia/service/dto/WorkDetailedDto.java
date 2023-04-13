@@ -1,5 +1,6 @@
-package cn.edu.xmu.blockchainandmultimedia.controller.vo;
+package cn.edu.xmu.blockchainandmultimedia.service.dto;
 
+import cn.edu.xmu.blockchainandmultimedia.controller.vo.AuthorVo;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -7,9 +8,9 @@ import lombok.NoArgsConstructor;
 import java.util.List;
 
 @Data
-@NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class WorkDetailedVo {
+@NoArgsConstructor
+public class WorkDetailedDto {
     private String workName;
     private String workDescription;
     private List<AuthorVo> authors;
