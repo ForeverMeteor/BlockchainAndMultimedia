@@ -2,6 +2,7 @@ package cn.edu.xmu.blockchainandmultimedia.dao.bo;
 
 import cn.edu.xmu.blockchainandmultimedia.controller.vo.AuthorVo;
 import cn.edu.xmu.blockchainandmultimedia.dao.AuthorDao;
+import cn.edu.xmu.blockchainandmultimedia.dao.WorkAuthorDao;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
@@ -21,14 +22,14 @@ public class WorkDetailed {
 
     @Setter
     @JsonIgnore
-    private AuthorDao authorDao;
+    private WorkAuthorDao workAuthorDao;
 
     @Setter
     private List<Author> authors;
 
     public List<Author> getAuthors(){
-        if(null == this.authors && null != authorDao){
-            this.authors = this.authorDao.findByWorkId();
+        if(null == this.authors && null != workAuthorDao){
+            this.authors = this.workAuthorDao.retrieveAuthorsByWorkId(id);
         }
         return this.authors;
     }

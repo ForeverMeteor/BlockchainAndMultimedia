@@ -3,27 +3,39 @@ package cn.edu.xmu.blockchainandmultimedia.dao;
 import cn.edu.xmu.blockchainandmultimedia.dao.bo.Author;
 import cn.edu.xmu.blockchainandmultimedia.mapper.AuthorMapper;
 import cn.edu.xmu.blockchainandmultimedia.mapper.WorkAuthorMapper;
+import cn.edu.xmu.blockchainandmultimedia.mapper.po.AuthorPo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 @RefreshScope
 public class AuthorDao {
     private AuthorMapper authorMapper;
-    private WorkAuthorMapper
+    private WorkAuthorMapper workAuthorMapper;
 
     @Autowired
     @Lazy
-    public AuthorDao(AuthorMapper authorMapper){
+    public AuthorDao(AuthorMapper authorMapper, WorkAuthorMapper workAuthorMapper){
         this.authorMapper = authorMapper;
+        this.workAuthorMapper = workAuthorMapper;
     }
 
-    public List<Author> findByWorkId(){
-        return authorMapper.
+    public Author findById(Long id){
+        AuthorPo authorPo=null;
+        Optional<AuthorPo> opt = authorMapper.findById(id);
+        if (opt.isPresent()){
+            authorPo = opt.get();
+        }else return null;
+
+        Author author = new Author();
+        BeanUtils.copyProperties(author, authorPo);
+        return author;
     }
 }
 

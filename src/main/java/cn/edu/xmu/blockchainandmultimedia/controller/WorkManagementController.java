@@ -2,7 +2,7 @@ package cn.edu.xmu.blockchainandmultimedia.controller;
 
 import cn.edu.xmu.blockchainandmultimedia.controller.vo.WorkDetailedModifyVo;
 import cn.edu.xmu.blockchainandmultimedia.service.*;
-import cn.edu.xmu.javaee.core.model.ReturnObject;
+import cn.edu.xmu.blockchainandmultimedia.util.ReturnObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

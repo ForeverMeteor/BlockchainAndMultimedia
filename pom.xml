@@ -27,13 +27,39 @@
         <alibaba.version>2021.1</alibaba.version>
         <spring.version>2.4.13</spring.version>
         <spring.cloud.version>3.0.1</spring.cloud.version>
+        <hibernateORM.version>6.1.0.Final</hibernateORM.version>  <!--HibernateORM 连接池版本-->
+        <hibernate.version>5.6.9.Final</hibernate.version>  <!--Hibernate版本-->
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>cn.edu.xmu.javaee</groupId>
-            <artifactId>core</artifactId>
-            <version>${project.version}</version>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <version>6.1.0.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-entitymanager</artifactId>
+            <version>5.6.15.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate.orm</groupId>
+            <artifactId>hibernate-hikaricp</artifactId>
+            <version>6.1.5.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core-jakarta</artifactId>
+            <version>5.6.15.Final</version>
+        </dependency>
+
+        <dependency>
+            <groupId>jakarta.persistence</groupId>
+            <artifactId>jakarta.persistence-api</artifactId>
+            <version>3.1.0</version>
         </dependency>
 
         <dependency>
@@ -57,7 +83,7 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-jpa</artifactId>
-            <version>${spring.version}</version>
+            <version>2.5.14</version>
         </dependency>
 
         <dependency>
@@ -257,6 +283,13 @@
                     <artifactId>maven-surefire-report-plugin</artifactId>
                     <version>3.0.0-M7</version>
                 </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefireplugin</artifactId>
+                    <version>2.22.2</version>
+                </plugin>
+
             </plugins>
         </pluginManagement>
     </build>

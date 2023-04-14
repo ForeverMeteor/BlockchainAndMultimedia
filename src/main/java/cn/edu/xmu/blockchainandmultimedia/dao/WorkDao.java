@@ -62,7 +62,7 @@ public class WorkDao {
                 .workNature(po.getWorkNature())
                 .publicNotice(po.getPublicNotice())
                 .rightBelonging(po.getRightBelonging())
-                .authorDao(this.authorDao)
+                .workAuthorDao(this.workAuthorDao)
                 .build();
         return bo;
     }
