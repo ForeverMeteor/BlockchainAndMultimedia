@@ -1,15 +1,18 @@
 package cn.edu.xmu.blockchainandmultimedia.service;
 
+import cn.edu.xmu.blockchainandmultimedia.controller.vo.AuthorVo;
 import cn.edu.xmu.blockchainandmultimedia.controller.vo.WorkDetailedModifyVo;
 import cn.edu.xmu.blockchainandmultimedia.dao.WorkDao;
+import cn.edu.xmu.blockchainandmultimedia.dao.bo.Author;
 import cn.edu.xmu.blockchainandmultimedia.dao.bo.Work;
+import cn.edu.xmu.blockchainandmultimedia.dao.bo.WorkDetailed;
 import cn.edu.xmu.blockchainandmultimedia.service.dto.PageDto;
 import cn.edu.xmu.blockchainandmultimedia.service.dto.SimpleWorkDto;
 import cn.edu.xmu.blockchainandmultimedia.service.dto.WorkDetailedDto;
 import cn.edu.xmu.blockchainandmultimedia.service.dto.WorkStatusDto;
+import cn.edu.xmu.javaee.core.model.ReturnNo;
 import cn.edu.xmu.javaee.core.model.ReturnObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -33,9 +36,8 @@ public class WorkManagementService {
      * @return
      */
     @Transactional
-    public PageDto<SimpleWorkDto> retrieveWorkByUserId(Long id, Integer page, Integer pageSize){
-        PageRequest pageRequest = PageRequest.of(page - 1, pageSize);
-        List<Work> works= workDao.retrieveWorkByUserId(id, pageRequest);
+    public PageDto<SimpleWorkDto> retrieveWorkByAuthorId(Long id, Integer page, Integer pageSize){
+        List<Work> works= workDao.retrieveWorkByAuthorId(id, page, pageSize);
         List<SimpleWorkDto> simpleWorkDtos = new ArrayList<>();
         for(int i=0; i<pageSize;i++){
             Work work = works.get((page-1)*pageSize + i);
@@ -59,7 +61,23 @@ public class WorkManagementService {
      */
     @Transactional
     public WorkDetailedDto retrieveWorkDetailedById(Long workId){
-        return workDao.retrieveWorkDetailedById(workId);
+        WorkDetailed workDetailed = workDao.retrieveWorkDetailedById(workId);
+
+        WorkDetailedDto workDetailedDto = WorkDetailedDto.builder()
+                .id(workDetailed.getId())
+                .workName(workDetailed.getWorkName())
+                .workDescription(workDetailed.getWorkDescription())
+                .authors(workDetailed.getAuthors())
+                .workCategory(workDetailed.getWorkCategory())
+                .finishTime(workDetailed.getFinishTime())
+                .finishPlace(workDetailed.getFinishPlace())
+                .publishStatus(workDetailed.getPublishStatus())
+                .rightsObtain(workDetailed.getRightsObtain())
+                .workNature(workDetailed.getWorkNature())
+                .publicNotice(workDetailed.getPublicNotice())
+                .build();
+
+        return workDetailedDto;
     }
 
     /**
@@ -69,8 +87,34 @@ public class WorkManagementService {
      * @return
      */
     public ReturnObject updateWorkDetailedById(Long workId, WorkDetailedModifyVo body){
-        //TODO 复制为BO
-        return workDao.saveWorkDetailedById(workId, BO);
+        WorkDetailed workDetailed = WorkDetailed.builder()
+                .id(workId)
+                .workName(body.getWorkName())
+                .workDescription(body.getWorkDescription())
+                .workCategory(body.getWorkCategory())
+                .finishTime(body.getFinishTime())
+                .finishPlace(body.getFinishPlace())
+                .publishStatus(body.getPublishStatus())
+                .rightsObtain(body.getRightsObtain())
+                .workNature(body.getWorkNature())
+                .publicNotice(body.getPublicNotice())
+                .build();
+
+        List<Author> authors = new ArrayList<>();
+        for(AuthorVo authorVo : body.getAuthors()){
+            Author author = Author.builder()
+                    .id(authorVo.getId())
+                    .authorCategory(authorVo.getAuthorCategory())
+                    .authorName(authorVo.getAuthorName())
+                    .signature(authorVo.getSignature())
+                    .authorRights(authorVo.getAuthorRights())
+                    .build();
+            authors.add(author);
+        }
+        workDetailed.setAuthors(authors);
+
+        workDao.save(workDetailed);
+        return new ReturnObject(ReturnNo.OK);
     }
 
     /**
@@ -80,7 +124,11 @@ public class WorkManagementService {
      * @return
      */
     public WorkStatusDto findCertificateStatus(Long workId){
-        return workDao.findCertificateStatus(workId);
+        WorkStatusDto workStatusDto = new WorkStatusDto();
+        Work work = workDao.findWorkById(workId);
+        workStatusDto.setStatus(work.getStatus());
+
+        return workStatusDto;
     }
 
     /**

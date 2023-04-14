@@ -21,6 +21,14 @@ public class WorkAuthorDao {
     }
 
     public List<WorkAuthorPo> retrieveByWorkId(Long workId){
-        this.workAuthorMapper.findByAuthorId(workId);
+        return this.workAuthorMapper.findByAuthorId(workId);
+    }
+
+    public WorkAuthorPo findByWorkIdAndAuthorId(Long workId, Long authorId){
+        return this.workAuthorMapper.findByWorkIdAndAuthorId(workId, authorId);
+    }
+
+    public void insert(WorkAuthorPo workAuthorPo){
+        this.workAuthorMapper.save(workAuthorPo);
     }
 }

@@ -12,4 +12,7 @@ public interface WorkAuthorMapper extends JpaRepository<WorkAuthorPo, Long> {
 
     List<WorkAuthorPo> findByWorkId(Long workId);
 
+    WorkAuthorPo findByWorkIdAndAuthorId(Long workId, Long authorId);
+
+
 }

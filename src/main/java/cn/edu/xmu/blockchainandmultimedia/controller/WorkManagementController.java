@@ -26,7 +26,7 @@ public class WorkManagementController {
      */
     @GetMapping("/{id}")
     public ReturnObject retrieveWorkByUserId(@PathVariable Long id) {
-        return new ReturnObject(workManagementService.retrieveWorkByUserId(id, 1, 10)); //id, page, pageSize
+        return new ReturnObject(workManagementService.retrieveWorkByAuthorId(id, 1, 10)); //id, page, pageSize
     }
 
     /**

@@ -10,7 +10,6 @@ import java.util.List;
 @NoArgsConstructor
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class WorkDetailedModifyVo {
-    private Long workId;
     private String workName;
     private String workDescription;
     private List<AuthorVo> authors;
