@@ -37,5 +37,11 @@ public class AuthorDao {
         BeanUtils.copyProperties(author, authorPo);
         return author;
     }
+
+    public void insert(Author author){
+        AuthorPo authorPo = new AuthorPo();
+        BeanUtils.copyProperties(authorPo, author);
+        authorMapper.save(authorPo);
+    }
 }
 

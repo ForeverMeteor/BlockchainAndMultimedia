@@ -1,8 +1,10 @@
 package cn.edu.xmu.blockchainandmultimedia.dao;
 
 import cn.edu.xmu.blockchainandmultimedia.dao.bo.Author;
+import cn.edu.xmu.blockchainandmultimedia.dao.bo.WorkAuthor;
 import cn.edu.xmu.blockchainandmultimedia.mapper.WorkAuthorMapper;
 import cn.edu.xmu.blockchainandmultimedia.mapper.po.WorkAuthorPo;
+import org.springframework.beans.BeanUtils;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
@@ -38,6 +40,11 @@ public class WorkAuthorDao {
         return this.workAuthorMapper.findByWorkIdAndAuthorId(workId, authorId);
     }
 
+    public void insert(WorkAuthor workAuthor){
+        WorkAuthorPo workAuthorPo = new WorkAuthorPo();
+        BeanUtils.copyProperties(workAuthorPo, workAuthor);
+        this.insert(workAuthorPo);
+    }
     public void insert(WorkAuthorPo workAuthorPo){
         this.workAuthorMapper.save(workAuthorPo);
     }
