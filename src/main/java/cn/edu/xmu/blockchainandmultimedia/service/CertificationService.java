@@ -76,12 +76,12 @@ public class CertificationService {
         for(AuthorDetailedVo authorDetailedVo : body.getAuthors()){
             Author author = new Author();
             /**
-             * 抛弃了用户上传的很多信息
+             * 抛弃了用户上传的很多信息，后续重新设计
              */
             BeanUtils.copyProperties(author, authorDetailedVo);
             authorDao.insert(author);
             WorkAuthor workAuthor = WorkAuthor.builder()
-                    .workId(999L)//写死，回头改
+                    .workId(999L)//写死，后续重新设计
                     .authorId(id)
                     .build();
             workAuthorDao.insert(workAuthor);

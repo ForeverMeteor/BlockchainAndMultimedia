@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @AllArgsConstructor
@@ -15,7 +16,7 @@ import java.util.List;
 @ToString(callSuper = true)
 @Data
 @Builder
-public class WorkDetailed {
+public class WorkDetailed implements Serializable {
     private Long id;
     private String workName;
     private String workDescription;

@@ -4,6 +4,7 @@ import cn.edu.xmu.blockchainandmultimedia.controller.vo.AuthorDetailedVo;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @AllArgsConstructor
@@ -12,7 +13,7 @@ import java.util.List;
 @ToString(callSuper = true)
 @Data
 @Builder
-public class CertificationWorkDetailed {
+public class CertificationWorkDetailed implements Serializable {
     private Long id;
     private String workName;
     private String workDescription;

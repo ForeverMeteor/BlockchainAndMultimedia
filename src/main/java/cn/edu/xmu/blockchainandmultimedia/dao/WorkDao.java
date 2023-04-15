@@ -81,14 +81,12 @@ public class WorkDao {
         if (authorId == null)
             return null;
 
-        List<WorkPo> workPos = workMapper.retrieveSimpleWorkByMainAuthorId(authorId, page, pageSize);
+        //List<WorkPo> workPos = workMapper.retrieveSimpleWorkByMainAuthorId(authorId, page, pageSize);
 
-        List<Work> works = new ArrayList<>();
-        for(WorkPo workPo : workPos){
-            Work work = getWorkBo(workPo);
-            works.add(work);
-        }
-        return works;
+        //需求变更，可查所有作品
+        List<Work> works = workAuthorDao.retrieveWorksByAuthorId(authorId);
+
+        return new ArrayList<>(works.subList(page*pageSize+1, page*pageSize+1+pageSize));
     }
 
     public WorkDetailed retrieveWorkDetailedById(Long workId){
@@ -96,7 +94,7 @@ public class WorkDao {
         return getWorkDetailedBo(workDetailedPo);
     }
 
-    public void save(WorkDetailed workDetailed){
+    public void insert(WorkDetailed workDetailed){
         WorkDetailedPo workDetailedPo;
         Optional<WorkDetailedPo> opt = workDetailedMapper.findById(workDetailed.getId());
         if(opt.isPresent())

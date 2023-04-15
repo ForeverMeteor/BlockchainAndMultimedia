@@ -21,8 +21,10 @@ public class CochainDao {
     }
     public void insert(CertificationWorkDetailed certificationWorkDetailed){
         WorkDetailed workDetailed = new WorkDetailed();
-        //丢失信息的保存方式，后续更改
+        //丢失用户信息的保存方式，后续更改
         BeanUtils.copyProperties(workDetailed, certificationWorkDetailed);
+
+        workDao.insert(workDetailed);
         return;
     }
 }

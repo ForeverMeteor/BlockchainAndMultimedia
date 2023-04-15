@@ -38,6 +38,7 @@ public class WorkManagementService {
     @Transactional
     public PageDto<SimpleWorkDto> retrieveWorkByAuthorId(Long id, Integer page, Integer pageSize){
         List<Work> works= workDao.retrieveWorkByAuthorId(id, page, pageSize);
+
         List<SimpleWorkDto> simpleWorkDtos = new ArrayList<>();
         for(int i=0; i<pageSize;i++){
             Work work = works.get((page-1)*pageSize + i);
@@ -113,7 +114,7 @@ public class WorkManagementService {
         }
         workDetailed.setAuthors(authors);
 
-        workDao.save(workDetailed);
+        workDao.insert(workDetailed);
         return new ReturnObject(ReturnNo.OK);
     }
 
