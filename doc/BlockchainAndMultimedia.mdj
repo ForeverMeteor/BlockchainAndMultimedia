@@ -1843,7 +1843,7 @@
 													"top": 287,
 													"width": 74.80712890625,
 													"height": 13,
-													"text": "User"
+													"text": "user"
 												},
 												{
 													"_type": "LabelView",
@@ -2531,7 +2531,7 @@
 							"_parent": {
 								"$ref": "AAAAAAGHguLTH2oGZiY="
 							},
-							"name": "User",
+							"name": "user",
 							"ownedElements": [
 								{
 									"_type": "UMLAssociation",
@@ -2570,7 +2570,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGHguDeIWnHNKs="
 									},
-									"name": "id"
+									"name": "id",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -2578,7 +2579,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGHguDeIWnHNKs="
 									},
-									"name": "login_name"
+									"name": "login_name",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -2586,7 +2588,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGHguDeIWnHNKs="
 									},
-									"name": "password"
+									"name": "password",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -2594,7 +2597,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGHguDeIWnHNKs="
 									},
-									"name": "mobile"
+									"name": "mobile",
+									"type": ""
 								},
 								{
 									"_type": "UMLAttribute",
@@ -2602,7 +2606,8 @@
 									"_parent": {
 										"$ref": "AAAAAAGHguDeIWnHNKs="
 									},
-									"name": "author_id"
+									"name": "author_id",
+									"type": ""
 								}
 							]
 						},
