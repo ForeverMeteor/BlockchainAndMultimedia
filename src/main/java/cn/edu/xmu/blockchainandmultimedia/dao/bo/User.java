@@ -9,11 +9,10 @@ import lombok.*;
 @ToString(callSuper = true)
 @Data
 @Builder
-public class Author {
+public class User {
     private Long id;
-    private Byte authorCategory;
-    private String authorName;
-    private Byte signature;
-    private Byte authorRights;
-
+    private String loginName;
+    private String password;
+    private String mobile;
+    private Long authorId;
 }

@@ -38,10 +38,14 @@ public class AuthorDao {
         return author;
     }
 
-    public void insert(Author author){
+    public Author insert(Author author){
         AuthorPo authorPo = new AuthorPo();
         BeanUtils.copyProperties(authorPo, author);
-        authorMapper.save(authorPo);
+        AuthorPo retPo = authorMapper.save(authorPo);
+
+        Author ret = new Author();
+        BeanUtils.copyProperties(ret, retPo);
+        return ret;
     }
 }
 

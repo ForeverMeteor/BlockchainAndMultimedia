@@ -22,7 +22,6 @@ import java.util.Optional;
 @Repository
 @RefreshScope
 public class WorkDao {
-
     private WorkMapper workMapper;
     private WorkAuthorMapper workAuthorMapper;
     private WorkDetailedMapper workDetailedMapper;
